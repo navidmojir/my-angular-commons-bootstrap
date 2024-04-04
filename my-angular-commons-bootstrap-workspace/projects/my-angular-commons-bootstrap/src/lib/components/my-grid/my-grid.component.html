@@ -1,0 +1,12 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th *ngFor="let colDef of columns">{{colDef.displayText}}</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr *ngFor="let entity of entities">
+			<td *ngFor="let colDef of columns">testing</td>
+		</tr>
+	</tbody>
+</table>
