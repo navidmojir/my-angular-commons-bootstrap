@@ -4,11 +4,12 @@ import { Sorting } from '../../utils/sorting';
 import { BaseService } from '../../services/base-service/base.service';
 import { FieldConfig } from '../../utils/field-config';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'lib-my-grid',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './my-grid.component.html',
   styleUrl: './my-grid.component.css'
 })
@@ -25,18 +26,21 @@ export class MyGridComponent implements OnInit{
   entities: any[] = [];
 
   totalCount: number = 0;
+  lastPageNumber: number = 0;
+
+  pageLabels: string[]= [];
 
   constructor(private baseService: BaseService){}
 
   ngOnInit(): void {
     this.loadConfigFromLocalStorage();
-    // if(this.entities.length == 0)
-    //   this.getDataFromBackend();
+    if(this.entities.length == 0)
+      this.getDataFromBackend();
   }
 
   private loadConfigFromLocalStorage() {
-    this.sorting = this.getFromLocalStorage("sorting");
-    this.paging = this.getFromLocalStorage("paging");
+    this.sorting = this.getFromLocalStorage("sorting") != null ? this.getFromLocalStorage("sorting") : new Sorting();
+    this.paging = this.getFromLocalStorage("paging") != null ? this.getFromLocalStorage("paging") : new Paging();
   }
 
   private getFromLocalStorage(key: string): any {
@@ -53,21 +57,29 @@ export class MyGridComponent implements OnInit{
   private getDataFromBackend(): void { 
     this.baseService.search(this.backendUrl, this.filters, this.paging, this.sorting).subscribe(
       (result: any) => {
+        console.log(result)
         this.entities = result.body;        
-        this.totalCount = +result.headers.get("X-Total-Count");	      
+        this.totalCount = +result.headers.get("X-Total-Count");	  
+        this.lastPageNumber = Math.floor(this.totalCount / this.paging.pageSize);
+        this.generatePageLabels();    
       }
     );
   }
 
-  applySorting(sortColumn: string, ascending: boolean): void {
-		this.sorting.sortColumn = sortColumn;
-    this.sorting.ascending = ascending;
+  applySorting(sortField: string): void {
+    if(sortField == this.sorting.sortField)
+      this.sorting.ascending = !this.sorting.ascending;
+    else
+      this.sorting.ascending = true;
+		
+    this.sorting.sortField = sortField;
+    
     this.setToLocalStorage('sorting', this.sorting);
 
 		this.getDataFromBackend();
   }
 
-  applyPaging(pageNumber: number, pageSize: number): void {
+  private applyPaging(pageNumber: number, pageSize: number): void {
 	
 		this.paging.pageNumber = pageNumber;
     this.paging.pageSize = pageSize;
@@ -76,5 +88,60 @@ export class MyGridComponent implements OnInit{
 		this.getDataFromBackend();
 	}
 
+  changePage(pageLabel: string) {
+    console.log(pageLabel)
+    if(pageLabel == '...')
+     return;
+    this.applyPaging(Number(pageLabel) - 1, this.paging.pageSize);
+  }
 
+  private generatePageLabels() {
+    this.pageLabels = [];
+
+    let currentPage = this.paging.pageNumber + 1;
+    let lastPage = this.lastPageNumber + 1;
+    let firstPage = 1;
+
+    console.log(currentPage, lastPage, this.totalCount)
+
+    let result = new Set<number>();
+
+    result.add(firstPage);
+
+    if(currentPage != 1)
+      result.add(currentPage - 1);
+
+    result.add(currentPage);
+
+    if(currentPage != lastPage)
+      result.add(currentPage + 1);
+
+    result.add(lastPage);
+
+    let prevR = -1;
+    for(let r of result) {
+      
+      if(r - prevR != 1 && r != 1)
+        this.pageLabels.push('...');
+      this.pageLabels.push(r + '');
+      prevR = r;
+    }
+    
+  }
+
+  pageSizeChanged(value: any) {
+    this.applyPaging(this.paging.pageNumber, value);
+  }
+
+  prevPage() {
+    if(this.paging.pageNumber - 1 < 0)
+      return;
+    this.applyPaging(this.paging.pageNumber - 1, this.paging.pageSize);
+  }
+
+  nextPage() {
+    if(this.paging.pageNumber + 1 > this.lastPageNumber)
+      return;
+    this.applyPaging(this.paging.pageNumber + 1, this.paging.pageSize);
+  }
 }

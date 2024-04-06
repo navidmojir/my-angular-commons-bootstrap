@@ -1,4 +1,4 @@
 export class Paging {
-    pageNumber: number = 1;
+    pageNumber: number = 0;
     pageSize: number = 5;
 }

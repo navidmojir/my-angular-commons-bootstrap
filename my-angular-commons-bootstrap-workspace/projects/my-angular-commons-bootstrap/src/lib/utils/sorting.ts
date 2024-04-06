@@ -1,4 +1,4 @@
 export class Sorting {
-    sortColumn: string = "";
+    sortField: string = "";
     ascending: boolean = true;
 }

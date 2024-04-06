@@ -70,6 +70,6 @@ export class BaseService {
 
     public search(path: string, filters: any, paging: Paging, sorting: Sorting) {
         let req = {filters: filters, paging: paging, sorting: sorting};
-        return this.post(path, req);
+        return this.post(path, req, {observe: 'response'});
     }
 }

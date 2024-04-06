@@ -9,4 +9,5 @@ export class FieldConfig {
     // values: any[] = [];
     valueTransformer = (value: any) => { return value };
     style = (value: any) => {return {}};
+    width = "";
 }

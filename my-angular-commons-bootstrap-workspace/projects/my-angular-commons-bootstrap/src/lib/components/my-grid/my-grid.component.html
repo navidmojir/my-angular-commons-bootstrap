@@ -1,12 +1,48 @@
 <table class="table table-striped">
 	<thead>
 		<tr>
-			<th *ngFor="let colDef of columns">{{colDef.displayText}}</th>
+			<th *ngFor="let colDef of columns" 
+				[style.cursor]="colDef.sortHeader ? 'pointer' : ''"
+				[style.width]="colDef.width"
+				(click)="applySorting(colDef.name)">
+				{{colDef.displayText}}
+				<i *ngIf="colDef.name == sorting.sortField && !sorting.ascending" class="bi bi-sort-down"></i>
+				<i *ngIf="colDef.name == sorting.sortField && sorting.ascending" class="bi bi-sort-up"></i>
+				
+			</th>
 		</tr>
 	</thead>
 	<tbody>
 		<tr *ngFor="let entity of entities">
-			<td *ngFor="let colDef of columns">testing</td>
+			<td *ngFor="let colDef of columns">{{entity[colDef.name]}}</td>
 		</tr>
 	</tbody>
 </table>
+	<div class="row">
+		<div class="col-10">
+			<nav>
+				<ul class="pagination">
+					<li class="page-item" [class.disabled]="paging.pageNumber==0" (click)="prevPage()">
+						<a class="page-link">قبلی</a>
+					</li>
+					<li *ngFor="let label of pageLabels" class="page-item" 
+						[class.active]="label == paging.pageNumber + 1 + ''"
+						(click)="changePage(label)">
+						<a class="page-link">{{label}}</a>
+					</li>
+					<li class="page-item" [class.disabled]="paging.pageNumber==lastPageNumber" (click)="nextPage()"><a class="page-link">بعدی</a></li>
+				</ul>
+			</nav>
+		</div>
+		<div class="col-1"><label for="pageSize" class="col-form-label">اندازه صفحه</label></div>
+		<div class="col-1">
+			
+			<select id="pageSize" class="form-select" [(ngModel)]="paging.pageSize" #pageSizeSelect (change)="pageSizeChanged(pageSizeSelect.value)">
+				<option value="5">5</option>
+				<option value="10">10</option>
+				<option value="20">20</option>
+			</select>
+		</div>
+
+		
+	</div>

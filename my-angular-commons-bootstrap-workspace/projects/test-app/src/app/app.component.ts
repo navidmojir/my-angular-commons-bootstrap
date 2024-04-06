@@ -19,8 +19,17 @@ export class AppComponent {
       displayText: 'شناسه',
       sortHeader: true,
       style: (value)=>{return ''},
-      valueTransformer: (value)=>{return value}
+      valueTransformer: (value)=>{return value},
+      width: '20%'
 
+    },
+    {
+      name: "description",
+      displayText: 'توضیحات',
+      sortHeader: true,
+      style: (value)=>{return ''},
+      valueTransformer: (value)=>{return value},
+      width: '80%'
     }
   ]
 }
