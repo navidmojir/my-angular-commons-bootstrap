@@ -19,7 +19,7 @@
 	</tbody>
 </table>
 	<div class="row">
-		<div class="col-10">
+		<div class="col-9">
 			<nav>
 				<ul class="pagination">
 					<li class="page-item" [class.disabled]="paging.pageNumber==0" (click)="prevPage()">
@@ -34,7 +34,8 @@
 				</ul>
 			</nav>
 		</div>
-		<div class="col-1"><label for="pageSize" class="col-form-label">اندازه صفحه</label></div>
+		<div class="col-1"><label class="col-form-label">تعداد کل: {{totalCount}}</label></div>
+		<div class="col-1"><label for="pageSize" class="col-form-label">اندازه صفحه:</label></div>
 		<div class="col-1">
 			
 			<select id="pageSize" class="form-select" [(ngModel)]="paging.pageSize" #pageSizeSelect (change)="pageSizeChanged(pageSizeSelect.value)">

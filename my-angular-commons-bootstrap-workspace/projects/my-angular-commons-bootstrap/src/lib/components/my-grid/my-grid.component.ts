@@ -60,7 +60,10 @@ export class MyGridComponent implements OnInit{
         console.log(result)
         this.entities = result.body;        
         this.totalCount = +result.headers.get("X-Total-Count");	  
+        // console.log(this.totalCount);
         this.lastPageNumber = Math.floor(this.totalCount / this.paging.pageSize);
+        if(this.totalCount % this.paging.pageSize == 0)
+          this.lastPageNumber--;
         this.generatePageLabels();    
       }
     );
@@ -102,7 +105,7 @@ export class MyGridComponent implements OnInit{
     let lastPage = this.lastPageNumber + 1;
     let firstPage = 1;
 
-    console.log(currentPage, lastPage, this.totalCount)
+    // console.log(currentPage, lastPage, this.totalCount)
 
     let result = new Set<number>();
 
