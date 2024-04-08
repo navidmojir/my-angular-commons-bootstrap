@@ -1,5 +1,5 @@
 <form #theForm="ngForm">
-    <div class="mb-3">
+    <div class="mb-3 mt-3">
       <label for="name" class="form-label">نام سامانه*</label>
       <input type="text" class="form-control" id="name" [(ngModel)]="software.name" name="name" required>
     </div>
@@ -8,5 +8,5 @@
       <textarea class="form-control" id="description" [(ngModel)]="software.description" name="description"></textarea>
     </div>
     <button class="btn btn-primary" (click)="submit()" [disabled]="!theForm.form.valid">ثبت</button>
-    <button class="btn btn-secondary" routerLink="/softwares">انصراف</button>
+    <button class="btn btn-secondary m-1" routerLink="/softwares">انصراف</button>
   </form>

@@ -18,6 +18,7 @@ export class MyGridComponent implements OnInit{
   @Input() backendUrl: string = "";
   @Input() filters: any;
   @Input() columns: FieldConfig[] = [];
+  @Input() actions: any[] = [];
 
   sorting: Sorting = new Sorting();
 
@@ -36,6 +37,8 @@ export class MyGridComponent implements OnInit{
     this.loadConfigFromLocalStorage();
     if(this.entities.length == 0)
       this.getDataFromBackend();
+
+    
   }
 
   private loadConfigFromLocalStorage() {

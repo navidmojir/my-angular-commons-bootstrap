@@ -5,6 +5,7 @@ import { PermissionsComponent } from './components/permissions/permissions.compo
 import { UsersComponent } from './components/users/users.component';
 import { OrganizationalUnitsComponent } from './components/organizational-units/organizational-units.component';
 import { CreateSoftwareComponent } from './components/create-software/create-software.component';
+import { SoftwareDetailsComponent } from './components/software-details/software-details.component';
 
 export const routes: Routes = [
     {
@@ -18,6 +19,10 @@ export const routes: Routes = [
     {
         path: 'softwares',
         component: SoftwaresComponent
+    },
+    {
+        path: 'softwares/:id',
+        component: SoftwareDetailsComponent
     },
     {
         path: 'users',
