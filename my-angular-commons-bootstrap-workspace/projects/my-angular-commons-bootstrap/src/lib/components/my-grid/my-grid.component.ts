@@ -15,7 +15,7 @@ import { FormsModule } from '@angular/forms';
 })
 export class MyGridComponent implements OnInit{
   @Input() prefix: string = "pre";
-  @Input() backendUrl: string = "";
+  @Input() serviceObject: BaseService | null = null;
   @Input() filters: any;
   @Input() columns: FieldConfig[] = [];
   @Input() actions: any[] = [];
@@ -31,7 +31,7 @@ export class MyGridComponent implements OnInit{
 
   pageLabels: string[]= [];
 
-  constructor(private baseService: BaseService){}
+  constructor(){}
 
   ngOnInit(): void {
     this.loadConfigFromLocalStorage();
@@ -58,7 +58,11 @@ export class MyGridComponent implements OnInit{
   }
 
   private getDataFromBackend(): void { 
-    this.baseService.search(this.backendUrl, this.filters, this.paging, this.sorting).subscribe(
+    if(this.serviceObject == null) {
+      console.error('serviceObject input is null');
+      return;
+    }
+    this.serviceObject.search(this.filters, this.paging, this.sorting).subscribe(
       (result: any) => {
         console.log(result)
         this.entities = result.body;        

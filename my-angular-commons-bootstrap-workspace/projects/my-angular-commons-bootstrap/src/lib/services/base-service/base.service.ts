@@ -20,12 +20,24 @@ export class BaseService {
 
     private errorDisplayer: ErrorDisplayer = new DefaultErrorDisplayer();
 
+    private baseUrl = '';
+
+    private resourceName = '';
+
     constructor(private httpClient: HttpClient
         ) {
     }
 
-    public setErrorDisplayer(ed: ErrorDisplayer) {
+    protected setErrorDisplayer(ed: ErrorDisplayer) {
         this.errorDisplayer = ed;
+    }
+
+    protected setBaseUrl(baseUrl: string) {
+        this.baseUrl = baseUrl;
+    }
+
+    protected setResourceName(resourceName: string) {
+        this.resourceName = resourceName;
     }
 
     private handleError(error: HttpErrorResponse) {
@@ -38,38 +50,57 @@ export class BaseService {
         return throwError(() => error);
     }
 
-    public post(path: string, body: any, options? : any) {
-        return this.httpClient.post(path, body, options).pipe(
+    public httpPost(path: string, body: any, options? : any) {
+        return this.httpClient.post(this.baseUrl + '/' + path, body, options).pipe(
               catchError((error) => this.handleError(error))
         );
     }
 
-    public get(path: string, options?: any) {
-        return this.httpClient.get(path, options).pipe(
+    public httpGet(path: string, options?: any) {
+        return this.httpClient.get(this.baseUrl + '/' + path, options).pipe(
             catchError((error) => this.handleError(error))
       );
     }
 
-    public getAsBlob(path: string) {
-        return this.httpClient.get(path, { responseType: 'blob' as 'json' }).pipe(
+    public httpGetAsBlob(path: string) {
+        return this.httpClient.get(this.baseUrl + '/' + path, { responseType: 'blob' as 'json' }).pipe(
             catchError((error) => this.handleError(error))
       );
     }
 
-    public put(path: string, body: any) {
-        return this.httpClient.put(path, body).pipe(
+    public httpPut(path: string, body: any) {
+        return this.httpClient.put(this.baseUrl + '/' + path, body).pipe(
               catchError((error) => this.handleError(error))
         );
     }
 
-    public delete(path: string) {
-        return this.httpClient.delete(path).pipe(
+    public httpDelete(path: string) {
+        return this.httpClient.delete(this.baseUrl + '/' + path).pipe(
               catchError((error) => this.handleError(error))
         );
     }
 
-    public search(path: string, filters: any, paging: Paging, sorting: Sorting) {
+    //CRUD and Search operations
+
+    public search(filters: any, paging: Paging, sorting: Sorting) {
         let req = {filters: filters, paging: paging, sorting: sorting};
-        return this.post(path, req, {observe: 'response'});
+        let path = this.resourceName + '/search';
+        return this.httpPost(path, req, {observe: 'response'});
+    }
+
+    public create(entity: any) {
+        return this.httpPost(this.resourceName, entity);
+    }
+
+    public retrieve(id: any) {
+        return this.httpGet(this.resourceName + '/' + id);
+    }
+
+    public update(id: any, entity: any) {
+        return this.httpPut(this.resourceName + '/' + id, entity);
+    }
+
+    public remove(id: any) {
+        return this.httpDelete(this.resourceName + '/' + id);
     }
 }

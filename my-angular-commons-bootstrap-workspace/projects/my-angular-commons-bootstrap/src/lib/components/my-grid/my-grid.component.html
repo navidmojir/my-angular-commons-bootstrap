@@ -17,7 +17,7 @@
 		<tr *ngFor="let entity of entities">
 			<td *ngFor="let colDef of columns">{{entity[colDef.name]}}</td>
 			<td *ngIf="actions.length > 0">
-				<i *ngFor="let action of actions" [class]="action.icon" (click)="action.handler(entity)" 
+				<i *ngFor="let action of actions" [class]="'bi bi-' + action.icon" (click)="action.handler(entity)" 
 					style="cursor: pointer;" [title]="action.title"></i>
 			</td>
 		</tr>

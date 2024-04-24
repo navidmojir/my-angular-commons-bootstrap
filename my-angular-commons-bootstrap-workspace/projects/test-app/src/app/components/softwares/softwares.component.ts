@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FieldConfig } from '../../../../../my-angular-commons-bootstrap/src/lib/utils/field-config';
 import { MyGridComponent } from '../../../../../my-angular-commons-bootstrap/src/lib/components/my-grid/my-grid.component';
 import { Router, RouterModule } from '@angular/router';
+import { SoftwareService } from '../../services/software/software.service';
 
 @Component({
   selector: 'app-softwares',
@@ -42,11 +43,13 @@ export class SoftwaresComponent {
 
   actionsDef = [
     {
-      icon: 'bi bi-eye',
+      icon: 'eye',
       handler: (entity: any)=>this.router.navigateByUrl("/softwares/" + entity.id),
       title: 'مشاهده جزئیات'
     }
   ]
 
-  constructor(private router: Router) {}
+  constructor(private router: Router,
+    public softwareService: SoftwareService
+  ) {}
 }

@@ -6,17 +6,22 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SoftwareService{
+export class SoftwareService extends BaseService {
 
-  private baseService: BaseService = new BaseService(this.httpClient);
+  // private baseService: BaseService = new BaseService(this.httpClient);
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private client: HttpClient) {
+    super(client);
+    this.setBaseUrl(environment.apiUrl);
+    this.setResourceName('softwares')
    }
 
   
-  public create(software: any) {
-    return this.baseService.post(environment.apiUrl + "/softwares", software);
-  } 
+  // public create(software: any) {
+  //   return this.baseService.post(environment.apiUrl + "/softwares", software);
+  // } 
+
+  
 
   
 }
