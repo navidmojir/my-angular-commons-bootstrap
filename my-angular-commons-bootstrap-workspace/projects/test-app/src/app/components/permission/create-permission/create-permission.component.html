@@ -1,0 +1,64 @@
+<div>
+    <div class="mb-3 mt-3">
+      <label for="name" class="form-label">نام سامانه*</label>
+      <input type="text" class="form-control" [value]="selectedSoftware.name" id="name" readonly data-bs-toggle="modal" data-bs-target="#softwareSelectModal">
+      
+    </div>
+    <div class="mb-3 mt-3">
+        <label for="name" class="form-label">نام کاربر*</label>
+        <input type="text" class="form-control" [value]="selectedUser.username" id="name" readonly data-bs-toggle="modal" data-bs-target="#userSelectModal">
+      </div>
+    <div class="mb-3">
+      <label for="description" class="form-label">توضیحات</label>
+      <textarea class="form-control" id="description" [(ngModel)]="description"></textarea>
+    </div>
+    <button class="btn btn-primary" (click)="submit()" [disabled]="!selectedUser.username || !selectedSoftware.name">ثبت</button>
+    <button class="btn btn-secondary m-1" routerLink="/permissions">انصراف</button>
+</div>
+
+<!-- Modal Select Software-->
+<div class="modal fade" id="softwareSelectModal" tabindex="-1" aria-labelledby="softwareSelectModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="softwareSelectModal">انتخاب سامانه</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #selectSoftwareModalCloseBtn></button>
+        </div>
+        <div class="modal-body">
+            <lib-my-grid 
+                prefix="cpss"
+                [serviceObject]="softwareService"
+                [columns]="softwareGridcolumnsDef"
+                [actions]="softwareGridActionsDef">
+            </lib-my-grid>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Select User-->
+<div class="modal fade" id="userSelectModal" tabindex="-1" aria-labelledby="userSelectModal" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="userSelectModal">انتخاب کاربر</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #selectUserModalCloseBtn></button>
+        </div>
+        <div class="modal-body">
+            <lib-my-grid 
+                prefix="cpus"
+                [serviceObject]="userService"
+                [columns]="userGridcolumnsDef"
+                [actions]="userGridActionsDef">
+            </lib-my-grid>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+        </div>
+      </div>
+    </div>
+  </div>

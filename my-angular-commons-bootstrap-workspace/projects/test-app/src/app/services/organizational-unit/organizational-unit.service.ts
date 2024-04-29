@@ -6,12 +6,12 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SoftwareService extends BaseService {
+export class OrganizationalUnitService extends BaseService {
 
   constructor(private client: HttpClient) {
     super(client);
     this.setBaseUrl(environment.apiUrl);
-    this.setResourceName('softwares')
+    this.setResourceName('organizationalUnits');
    }
 
   

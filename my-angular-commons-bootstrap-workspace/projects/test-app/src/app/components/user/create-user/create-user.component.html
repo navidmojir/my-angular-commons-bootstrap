@@ -1,0 +1,17 @@
+<form #theForm="ngForm">
+    <div class="mb-3 mt-3">
+      <label for="name" class="form-label">نام کاربری*</label>
+      <input type="text" class="form-control" id="name" [(ngModel)]="user.username" name="name" required>
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">نام</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="user.firstName" name="name">
+    </div>
+    <div class="mb-3">
+        <label for="name" class="form-label">نام خانوادگی</label>
+        <input type="text" class="form-control" id="name" [(ngModel)]="user.lastName" name="name">
+    </div>
+    
+    <button class="btn btn-primary" (click)="submit()" [disabled]="!theForm.form.valid">ثبت</button>
+    <button class="btn btn-secondary m-1" routerLink="/users">انصراف</button>
+  </form>

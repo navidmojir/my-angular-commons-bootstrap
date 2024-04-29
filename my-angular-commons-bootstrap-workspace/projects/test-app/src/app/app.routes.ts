@@ -1,11 +1,16 @@
 import { Routes } from '@angular/router';
-import { SoftwaresComponent } from './components/softwares/softwares.component';
+import { SoftwaresComponent } from './components/software/softwares/softwares.component';
 import { MyPermissionsComponent } from './components/my-permissions/my-permissions.component';
-import { PermissionsComponent } from './components/permissions/permissions.component';
-import { UsersComponent } from './components/users/users.component';
-import { OrganizationalUnitsComponent } from './components/organizational-units/organizational-units.component';
-import { CreateSoftwareComponent } from './components/create-software/create-software.component';
-import { SoftwareDetailsComponent } from './components/software-details/software-details.component';
+import { PermissionsComponent } from './components/permission/permissions/permissions.component';
+import { OrganizationalUnitsComponent } from './components/organizational-unit/organizational-units/organizational-units.component';
+import { CreateSoftwareComponent } from './components/software/create-software/create-software.component';
+import { SoftwareDetailsComponent } from './components/software/create-software/software-details/software-details.component';
+import { UsersComponent } from './components/user/users/users.component';
+import { CreateUserComponent } from './components/user/create-user/create-user.component';
+import { UserDetailsComponent } from './components/user/user-details/user-details.component';
+import { CreateOrganizationalUnitComponent } from './components/organizational-unit/create-organizational-unit/create-organizational-unit.component';
+import { OrganizationalUnitDetailsComponent } from './components/organizational-unit/organizational-unit-details/organizational-unit-details.component';
+import { CreatePermissionComponent } from './components/permission/create-permission/create-permission.component';
 
 export const routes: Routes = [
     {
@@ -15,6 +20,10 @@ export const routes: Routes = [
     {
         path: 'permissions',
         component: PermissionsComponent
+    },
+    {
+        path: 'create-permission',
+        component: CreatePermissionComponent
     },
     {
         path: 'softwares',
@@ -29,11 +38,27 @@ export const routes: Routes = [
         component: UsersComponent
     },
     {
+        path: 'users/:username',
+        component: UserDetailsComponent
+    },
+    {
         path: 'organizational-units',
         component: OrganizationalUnitsComponent
     },
     {
+        path: 'organizational-units/:id',
+        component: OrganizationalUnitDetailsComponent
+    },
+    {
+        path: 'create-organizational-unit',
+        component: CreateOrganizationalUnitComponent
+    },
+    {
         path: 'create-software',
         component: CreateSoftwareComponent
+    },
+    {
+        path: 'create-user',
+        component: CreateUserComponent
     },
 ];

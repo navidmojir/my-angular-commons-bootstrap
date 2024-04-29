@@ -64,16 +64,23 @@ export class MyGridComponent implements OnInit{
     }
     this.serviceObject.search(this.filters, this.paging, this.sorting).subscribe(
       (result: any) => {
-        console.log(result)
+        // console.log(result)
         this.entities = result.body;        
         this.totalCount = +result.headers.get("X-Total-Count");	  
-        // console.log(this.totalCount);
-        this.lastPageNumber = Math.floor(this.totalCount / this.paging.pageSize);
-        if(this.totalCount % this.paging.pageSize == 0)
-          this.lastPageNumber--;
+        this.calculateLastPageNumber();
         this.generatePageLabels();    
       }
     );
+  }
+
+  private calculateLastPageNumber() {
+    if(this.totalCount == 0)
+      this.lastPageNumber = 0;
+    else {
+      this.lastPageNumber = Math.floor(this.totalCount / this.paging.pageSize);
+      if(this.totalCount % this.paging.pageSize == 0)
+        this.lastPageNumber--;
+    }
   }
 
   applySorting(sortField: string): void {
