@@ -24,21 +24,11 @@ export class SoftwareDetailsComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // this.loadSoftwareIdFromUrl();
     this.softwareId = this.generalHelper.loadIdFromUrl(this.route);
 
     if(this.softwareId != 0) 
       this.loadSoftware();
   }
-
-  // private loadSoftwareIdFromUrl() {
-  //   let strSoftwareId = this.route.snapshot.paramMap.get('id');
-  //   if(strSoftwareId == null) {
-  //     console.log('software id is not provided in the path');
-  //     return;
-  //   }
-  //   this.softwareId = +strSoftwareId;
-  // }
 
   private loadSoftware() {
     this.softwareService.retrieve(this.softwareId).subscribe(

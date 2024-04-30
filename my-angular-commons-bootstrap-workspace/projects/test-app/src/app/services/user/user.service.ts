@@ -14,5 +14,9 @@ export class UserService extends BaseService {
     this.setResourceName('users');
    }
 
+   public myPermissions() {
+    return this.httpGet("users/me/permissions");
+   }
+
   
 }

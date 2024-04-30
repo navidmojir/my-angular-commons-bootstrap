@@ -1,1 +1,13 @@
-<p>my-permissions works!</p>
+<table class="table table-striped table-hover">
+    <tbody>
+        <tr>
+            <th>نام سامانه</th>
+            <th>توضیحات دسترسی</th>
+        </tr>
+        <tr *ngFor="let perm of myPermissions">
+            <td>{{perm.softwareName}}</td>
+            <td>{{perm.description}}</td>
+        </tr>
+        <tr *ngIf="myPermissions.length == 0">شما به هیچ سامانه ای دسترسی ندارید.</tr>
+    </tbody>
+</table>

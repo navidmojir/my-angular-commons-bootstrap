@@ -11,6 +11,7 @@ import { UserDetailsComponent } from './components/user/user-details/user-detail
 import { CreateOrganizationalUnitComponent } from './components/organizational-unit/create-organizational-unit/create-organizational-unit.component';
 import { OrganizationalUnitDetailsComponent } from './components/organizational-unit/organizational-unit-details/organizational-unit-details.component';
 import { CreatePermissionComponent } from './components/permission/create-permission/create-permission.component';
+import { PermissionDetailsComponent } from './components/permission/permission-details/permission-details.component';
 
 export const routes: Routes = [
     {
@@ -24,6 +25,10 @@ export const routes: Routes = [
     {
         path: 'create-permission',
         component: CreatePermissionComponent
+    },
+    {
+        path: 'permissions/:id',
+        component: PermissionDetailsComponent
     },
     {
         path: 'softwares',

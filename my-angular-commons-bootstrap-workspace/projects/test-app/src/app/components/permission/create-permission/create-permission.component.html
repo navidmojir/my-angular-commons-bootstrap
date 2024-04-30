@@ -29,7 +29,8 @@
                 prefix="cpss"
                 [serviceObject]="softwareService"
                 [columns]="softwareGridcolumnsDef"
-                [actions]="softwareGridActionsDef">
+                [actions]="softwareGridActionsDef" 
+                >
             </lib-my-grid>
         </div>
         <div class="modal-footer">
@@ -48,12 +49,26 @@
           <h1 class="modal-title fs-5" id="userSelectModal">انتخاب کاربر</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #selectUserModalCloseBtn></button>
         </div>
+        <form class="mb-2 p-2">
+          <div class="row g-3 align-items-center">
+            <div class="col-auto">
+              <label for="inputUserName" class="col-form-label" >نام کاربر</label>
+            </div>
+            <div class="col-auto">
+              <input type="text" id="inputUserName" class="form-control" [(ngModel)]="userFilters.username" name="username">
+            </div>
+            <div class="col-auto">
+              <button class="btn btn-primary" (click)="applyUserFilters()">جستجو</button>
+            </div>
+          </div>
+        </form>
         <div class="modal-body">
-            <lib-my-grid 
+            <lib-my-grid #userSelectGrid
                 prefix="cpus"
                 [serviceObject]="userService"
                 [columns]="userGridcolumnsDef"
-                [actions]="userGridActionsDef">
+                [actions]="userGridActionsDef"
+                [filters]="userFilters">
             </lib-my-grid>
         </div>
         <div class="modal-footer">

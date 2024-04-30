@@ -11,7 +11,37 @@
         <label for="name" class="form-label">نام خانوادگی</label>
         <input type="text" class="form-control" id="name" [(ngModel)]="user.lastName" name="name">
     </div>
+
+    <div class="mb-3 mt-3">
+      <label for="name" class="form-label">واحد سازمانی</label>
+      <input type="text" class="form-control" [value]="selectedOrganizationalUnit.name" id="name" readonly data-bs-toggle="modal" 
+        data-bs-target="#ouSelectModal">
+      
+    </div>
     
     <button class="btn btn-primary" (click)="submit()" [disabled]="!theForm.form.valid">ثبت</button>
     <button class="btn btn-secondary m-1" routerLink="/users">انصراف</button>
   </form>
+
+  <!-- Modal Select OU-->
+<div class="modal fade" id="ouSelectModal" tabindex="-1" aria-labelledby="ouSelectModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ouSelectModal">انتخاب واحد سازمانی</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #selectOUModalCloseBtn></button>
+      </div>
+      <div class="modal-body">
+          <lib-my-grid 
+              prefix="cusou"
+              [serviceObject]="organizationalUnitService"
+              [columns]="organizationalUnitGridcolumnsDef"
+              [actions]="organizationalUnitGridActionsDef">
+          </lib-my-grid>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,11 @@ import { Injectable } from "@angular/core";
 
 export class DefaultErrorDisplayer implements ErrorDisplayer{
     display(error: HttpErrorResponse): void {
-        alert(error.message);
+        console.log(error);
+        if(error.error.message)
+            alert(error.error.message);
+        else
+            alert(error.message);
     }
 
 }

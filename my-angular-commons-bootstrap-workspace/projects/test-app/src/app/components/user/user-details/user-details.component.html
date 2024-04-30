@@ -35,6 +35,14 @@
                     <input type="text" class="form-control" [(ngModel)]="user.lastName" name="lastName">
                 </td>
             </tr>
+            <tr>
+              <th>واحد سازمانی</th>
+              <td *ngIf="!editing">{{user.organizationalUnitName}}</td>
+              <td *ngIf="editing">
+                <input type="text" class="form-control" [value]="selectedOrganizationalUnit.name" id="name" readonly data-bs-toggle="modal" 
+                  data-bs-target="#ouSelectModal">
+              </td>
+          </tr>
         </tbody>
     </table>
 </form>
@@ -58,3 +66,26 @@
       </div>
     </div>
   </div>
+
+   <!-- Modal Select OU-->
+<div class="modal fade" id="ouSelectModal" tabindex="-1" aria-labelledby="ouSelectModal" aria-hidden="true">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="ouSelectModal">انتخاب واحد سازمانی</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" #selectOUModalCloseBtn></button>
+      </div>
+      <div class="modal-body">
+          <lib-my-grid 
+              prefix="udsou"
+              [serviceObject]="organizationalUnitService"
+              [columns]="organizationalUnitGridcolumnsDef"
+              [actions]="organizationalUnitGridActionsDef">
+          </lib-my-grid>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">انصراف</button>
+      </div>
+    </div>
+  </div>
+</div>

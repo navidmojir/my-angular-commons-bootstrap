@@ -37,8 +37,6 @@ export class MyGridComponent implements OnInit{
     this.loadConfigFromLocalStorage();
     if(this.entities.length == 0)
       this.getDataFromBackend();
-
-    
   }
 
   private loadConfigFromLocalStorage() {
@@ -160,5 +158,10 @@ export class MyGridComponent implements OnInit{
     if(this.paging.pageNumber + 1 > this.lastPageNumber)
       return;
     this.applyPaging(this.paging.pageNumber + 1, this.paging.pageSize);
+  }
+
+  public reload() {
+    console.log(this.filters)
+    this.getDataFromBackend();
   }
 }

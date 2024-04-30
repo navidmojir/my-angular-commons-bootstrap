@@ -18,6 +18,9 @@ export class CreatePermissionComponent {
 
   @ViewChild('selectSoftwareModalCloseBtn') selectSoftwareModalCloseBtn!: ElementRef;
   @ViewChild('selectUserModalCloseBtn') selectUserModalCloseBtn!: ElementRef;
+  @ViewChild('userSelectGrid') usersGrid!: MyGridComponent;
+
+  userFilters: any = {};
 
   selectedSoftware: any = {name:''};
   selectedUser: any = {username:''};
@@ -119,5 +122,9 @@ export class CreatePermissionComponent {
     this.permissionService.create(req).subscribe(
       (result) => this.router.navigateByUrl("/permissions")
     );
+  }
+
+  applyUserFilters() {
+    this.usersGrid.reload();
   }
 }
