@@ -13,6 +13,15 @@
         <input type="text" class="form-control" id="name" [(ngModel)]="user.lastName" name="name">
     </div>
 
+    <div class="mb-3">
+      <label for="role" class="form-label">نقش</label>
+      <select class="form-select" id="role" [(ngModel)]="user.role" name="role">
+        <option *ngFor="let role of enums.roles" [value]="role.value">{{role.title}}</option>
+      </select>
+    </div>
+
+    
+
     <div class="mb-3 mt-3">
       <label for="name" class="form-label">واحد سازمانی</label>
       <input type="text" class="form-control" [value]="selectedOrganizationalUnit.name" id="name" readonly data-bs-toggle="modal" 

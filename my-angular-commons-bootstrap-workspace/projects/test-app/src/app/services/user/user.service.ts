@@ -18,5 +18,9 @@ export class UserService extends BaseService {
     return this.httpGet("users/me/permissions");
    }
 
+   public me() {
+    return this.httpGet("users/me");
+   }
+
   
 }

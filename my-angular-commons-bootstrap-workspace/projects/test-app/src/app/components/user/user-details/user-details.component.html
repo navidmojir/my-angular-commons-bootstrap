@@ -36,6 +36,15 @@
                 </td>
             </tr>
             <tr>
+                <th>نقش</th>
+                <td *ngIf="!editing">{{enums.getRoleTitle(user.role)}}</td>
+                <td *ngIf="editing">
+                    <select class="form-select" aria-label="Default select example" [(ngModel)]="user.role" name="role">
+                      <option *ngFor="let role of enums.roles" [value]="role.value">{{role.title}}</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
               <th>واحد سازمانی</th>
               <td *ngIf="!editing">{{user.organizationalUnitName}}</td>
               <td *ngIf="editing">

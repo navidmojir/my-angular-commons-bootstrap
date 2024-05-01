@@ -15,6 +15,11 @@ import { PermissionDetailsComponent } from './components/permission/permission-d
 
 export const routes: Routes = [
     {
+        path: '',
+        redirectTo: 'my-permissions',
+        pathMatch: 'full'
+    },
+    {
         path: 'my-permissions',
         component: MyPermissionsComponent
     },

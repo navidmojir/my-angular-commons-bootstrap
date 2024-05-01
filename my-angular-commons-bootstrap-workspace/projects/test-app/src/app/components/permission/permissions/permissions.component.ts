@@ -36,7 +36,7 @@ export class PermissionsComponent {
     {
       name: "username",
       displayText: 'نام کاربر',
-      sortHeader: true,
+      sortHeader: false,
       style: (value)=>{return ''},
       valueTransformer: (value)=>{return value},
       width: '20%'

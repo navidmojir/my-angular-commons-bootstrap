@@ -4,6 +4,7 @@ import { Router, RouterModule } from '@angular/router';
 import { UserService } from '../../../services/user/user.service';
 import { MyGridComponent } from '../../../../../../my-angular-commons-bootstrap/src/public-api';
 import { FormsModule } from '@angular/forms';
+import { Enums } from '../../../utils/enums';
 
 @Component({
   selector: 'app-users',
@@ -33,7 +34,7 @@ export class UsersComponent {
       sortHeader: true,
       style: (value)=>{return ''},
       valueTransformer: (value)=>{return value},
-      width: '20%'
+      width: '10%'
     },
     {
       name: "lastName",
@@ -41,7 +42,15 @@ export class UsersComponent {
       sortHeader: true,
       style: (value)=>{return ''},
       valueTransformer: (value)=>{return value},
-      width: '30%'
+      width: '20%'
+    },
+    {
+      name: "role",
+      displayText: 'نقش',
+      sortHeader: true,
+      style: (value)=>{return ''},
+      valueTransformer: (value)=>{return Enums.getRoleTitle(value)},
+      width: '10%'
     },
     {
       name: "organizationalUnitName",
@@ -49,7 +58,7 @@ export class UsersComponent {
       sortHeader: true,
       style: (value)=>{return ''},
       valueTransformer: (value)=>{return value},
-      width: '40%'
+      width: '50%'
     }
   ]
 

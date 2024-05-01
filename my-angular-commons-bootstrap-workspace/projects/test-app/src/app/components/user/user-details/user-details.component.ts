@@ -7,6 +7,7 @@ import { GeneralHelperService } from '../../../../../../my-angular-commons-boots
 import { OrganizationalUnitService } from '../../../services/organizational-unit/organizational-unit.service';
 import { FieldConfig } from '../../../../../../my-angular-commons-bootstrap/src/lib/utils/field-config';
 import { MyGridComponent } from '../../../../../../my-angular-commons-bootstrap/src/public-api';
+import { Enums } from '../../../utils/enums';
 
 @Component({
   selector: 'app-user-details',
@@ -17,6 +18,8 @@ import { MyGridComponent } from '../../../../../../my-angular-commons-bootstrap/
 })
 export class UserDetailsComponent {
   @ViewChild('selectOUModalCloseBtn') selectOUModalCloseBtn!: ElementRef;
+
+  enums = Enums;
   
   private username: string | null = null;
   user: any = {};
@@ -82,6 +85,7 @@ export class UserDetailsComponent {
       (result) => { 
         this.user = result;
         this.selectedOrganizationalUnit.name = this.user.organizationalUnitName;
+        this.selectedOrganizationalUnit.id = this.user.organizationalUnitId;
       }
     );
   }

@@ -5,19 +5,25 @@ import { Router, RouterModule } from '@angular/router';
 import { OrganizationalUnitService } from '../../../services/organizational-unit/organizational-unit.service';
 import { FieldConfig } from '../../../../../../my-angular-commons-bootstrap/src/lib/utils/field-config';
 import { MyGridComponent } from '../../../../../../my-angular-commons-bootstrap/src/public-api';
+import { Enums } from '../../../utils/enums';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-create-user',
   standalone: true,
-  imports: [FormsModule, RouterModule, MyGridComponent],
+  imports: [FormsModule, RouterModule, MyGridComponent, CommonModule],
   templateUrl: './create-user.component.html',
   styleUrl: './create-user.component.css'
 })
 export class CreateUserComponent {
 
   @ViewChild('selectOUModalCloseBtn') selectOUModalCloseBtn!: ElementRef;
+
   user: any = {};
+  
   selectedOrganizationalUnit: any = {id:0, name: ''};
+
+  enums = Enums;
 
   organizationalUnitGridcolumnsDef: FieldConfig[] = [
     {
