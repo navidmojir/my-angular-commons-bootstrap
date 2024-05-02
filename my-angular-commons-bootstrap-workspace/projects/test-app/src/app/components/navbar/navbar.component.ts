@@ -23,13 +23,12 @@ export class NavbarComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.authService.init().subscribe(
-      () => {
-        this.currentUsername = this.authService.getCurrentUsername();
-        this.makeNavItems();
-      }
-    )
+    this.authService.init(()=>{
+      this.currentUsername = this.authService.getCurrentUsername();
+      this.makeNavItems();
+    });
   }
+
 
   private makeNavItems() {
     this.navbarItems.push(

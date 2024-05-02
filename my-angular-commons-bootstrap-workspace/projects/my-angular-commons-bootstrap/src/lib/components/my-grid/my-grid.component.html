@@ -4,7 +4,7 @@
 			<th *ngFor="let colDef of columns" 
 				[style.cursor]="colDef.sortHeader ? 'pointer' : ''"
 				[style.width]="colDef.width"
-				(click)="applySorting(colDef.name)">
+				(click)="colDef.sortHeader ? applySorting(colDef.name) : doNothing()">
 				{{colDef.displayText}}
 				<i *ngIf="colDef.name == sorting.sortField && !sorting.ascending" class="bi bi-sort-down"></i>
 				<i *ngIf="colDef.name == sorting.sortField && sorting.ascending" class="bi bi-sort-up"></i>

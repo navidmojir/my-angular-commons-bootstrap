@@ -10,11 +10,11 @@ import { UserService } from '../../services/user/user.service';
   styleUrl: './my-permissions.component.css'
 })
 export class MyPermissionsComponent implements OnInit{
-  myPermissions: any;
+  myPermissions: any[] = [];
 
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    this.userService.myPermissions().subscribe((result)=> this.myPermissions = result);
+    this.userService.myPermissions().subscribe((result: any)=> this.myPermissions = result);
   }
 }

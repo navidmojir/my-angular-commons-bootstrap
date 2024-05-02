@@ -19,8 +19,9 @@ export class AuthService {
 
   public hasRole(role: Role): boolean {
     this.checkIfPrincipalIsInitialized();
+    // console.log(this.principal.authorities, Role[role])
     for(let authority of this.principal.authorities) {
-      if(authority.authority == "ROLE_" + role)
+      if(authority.authority == "ROLE_" + Role[role])
         return true;
     }
     return false;
@@ -36,11 +37,13 @@ export class AuthService {
       throw "Auth service not initialized yet. Subscribe on init function first.";
   }
 
-  public init() {
-    if(this.principal == undefined)
-      return this.userService.me();
-    else
-      return of(this.principal)
+  public init(callback: any) {
+    if(this.principal == undefined) {
+      this.userService.me().subscribe((p)=> {
+          this.principal = p;
+          callback();
+        });
+    }
   }
 
   

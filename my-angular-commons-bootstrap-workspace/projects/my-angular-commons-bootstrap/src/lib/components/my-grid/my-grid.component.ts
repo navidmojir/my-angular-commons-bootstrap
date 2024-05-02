@@ -164,4 +164,6 @@ export class MyGridComponent implements OnInit{
     console.log(this.filters)
     this.getDataFromBackend();
   }
+
+  doNothing(){}
 }
